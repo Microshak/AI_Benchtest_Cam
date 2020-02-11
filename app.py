@@ -39,7 +39,13 @@ def manifest():
 
     data = json.loads(manifest)
     data['host_name'] =  socket.gethostname()
-    data['ip_address'] = socket.gethostbyname(data['host_name'])
+
+    gw = os.popen("ip -4 route show default").read().split()
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect((gw[2], 0))
+    ipaddr = s.getsockname()[0]
+
+    data['ip_address'] = ipaddr
     url = 'https://ai-benchtest.azurewebsites.net/cam'
     r = requests.post(url = url, json =data) 
     txt = r.text 
