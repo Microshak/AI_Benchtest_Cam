@@ -39,6 +39,7 @@ def manifest():
 
     data = json.loads(manifest)
     data['host_name'] =  socket.gethostname()
+    data['ip_address'] = socket.gethostbyname(data['host_name'])
     url = 'https://ai-benchtest.azurewebsites.net/cam'
     r = requests.post(url = url, json =data) 
     txt = r.text 
