@@ -51,16 +51,6 @@ def manifest():
     txt = r.text 
     print(txt)
 
-
-
-
-
-
-
-
-
-
-
 def gen( height,width, downsample):
  
 
@@ -91,14 +81,8 @@ def stream():
     return Response(gen(height,width, downsample), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-
-
-
-
 if __name__ == '__main__':
     manifest()
     scheduler.add_job(id ='Scheduled task', func = manifest, trigger = 'interval', minutes = 10)
     scheduler.start()    
     app.run(host='0.0.0.0', threaded=True)
-
-    

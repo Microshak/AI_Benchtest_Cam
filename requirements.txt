@@ -1,4 +1,4 @@
 Flask-APScheduler
-Flask
-socket 
+Flask 
 imutils
+gunicorn

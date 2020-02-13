@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:8000 runserver:app
+    ports:
+      - 8000:8000
+    
