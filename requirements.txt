@@ -2,3 +2,4 @@ Flask-APScheduler
 Flask 
 imutils
 gunicorn
+opencv-python
