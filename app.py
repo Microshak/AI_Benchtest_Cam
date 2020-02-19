@@ -21,17 +21,25 @@ def gen2(camera, height,width):
     """Returns a single image frame"""
     frame = camera.get_frame()
     dim = (width, height)
-    frame = imutils.resize(frame, width=int(width), height=int(height))
+    #frame = imutils.resize(frame, width=int(width), height=int(height))
+    iheight = int(height)
+    iwidth = int(width)
+    
+    frame = frame[0:iheight, 0:iwidth]
     frame = cv2.imencode('.jpg', frame)[1].tobytes()
+ 
+    
     yield frame
 
 @app.route('/image.jpg')
 def image():
     height = request.args.get('height')
     width = request.args.get('width')
- 
+    cam = Camera()
+    cam.set_video_height(int(height))
+    cam.set_video_width(int(width))
     """Returns a single current image for the webcam"""
-    return Response(gen2(Camera(), height,width), mimetype='image/jpeg')
+    return Response(gen2(cam, height,width), mimetype='image/jpeg')
 
 def manifest():
     f = open("manifest.json", "r")
